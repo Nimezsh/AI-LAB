@@ -1,0 +1,71 @@
+Experiment 9: To implement and understand the working of BFS and DFS search algorithm.
+
+Objective: To implement graph traversal techniques using Breadth-First Search (BFS) and Depth-First Search (DFS).
+
+ 
+
+*BFS*
+
+CODE:
+
+# To implement Breadth-First Search algorithm for graph traversal
+
+ 
+
+# Import deque from collections (used as a queue for BFS)
+
+from collections import deque
+
+ 
+
+# Define the graph as an adjacency list (dictionary)
+
+graph = {
+
+   'A': ['B', 'C'],   # Node A is connected to B and C
+
+   'B': ['D', 'E'],   # Node B is connected to D and E
+
+   'C': ['F'],        # Node C is connected to F
+
+   'D': [],           # Node D has no children
+
+   'E': ['F'],        # Node E is connected to F
+
+   'F': []            # Node F has no children
+
+}
+
+ 
+
+# Define the BFS function
+
+def bfs(start):
+
+   visited = set()              # To keep track of visited nodes (avoid repetition)
+
+   queue = deque([start])       # Initialize a queue with the start node
+
+ 
+
+   # Loop until queue becomes empty
+
+   while queue:
+
+       node = queue.popleft()   # Remove the first element from the queue
+
+       if node not in visited:  # If the node is not already visited
+
+           print(node, end=" ") # Print the node (traversal order)
+
+           visited.add(node)    # Mark the node as visited
+
+           queue.extend(graph[node])  # Add all neighbors of this node into the queue
+
+ 
+
+# Call the BFS function starting from node 'A'
+
+print("BFS Traversal starting from node A:")
+
+bfs('A')
