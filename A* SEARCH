@@ -1,0 +1,117 @@
+To implement the A* search algorithm using a heuristic function.
+
+Objective: To find the best and shortest route from the starting point to the destination.
+
+ 
+
+CODE:
+
+import heapq
+
+ 
+
+# Define the A* function
+
+def a_star(start, goal, graph, heuristics):
+
+    # Priority queue stores tuples: (estimated_total_cost, cost_so_far, current_node, path_taken)
+
+    queue = [(heuristics[start], 0, start, [])]
+
+    visited = set()  # To track visited nodes
+
+ 
+
+    # Loop until queue becomes empty
+
+    while queue:
+
+        est_total, cost_so_far, node, path = heapq.heappop(queue)  # Pop the node with lowest estimate
+
+ 
+
+        if node in visited:  # Skip already visited nodes
+
+            continue
+
+ 
+
+        visited.add(node)  # Mark node as visited
+
+        path = path + [node]  # Add current node to path
+
+ 
+
+        # If goal is reached, return the path
+
+        if node == goal:
+
+            return path
+
+ 
+
+        # Explore neighbors
+
+        for neighbor, edge_cost in graph[node]:
+
+            if neighbor not in visited:
+
+                new_cost = cost_so_far + edge_cost       # g(n): path cost so far
+
+                est = new_cost + heuristics[neighbor]    # f(n) = g(n) + h(n)
+
+                # Push neighbor into priority queue with updated cost and path
+
+                heapq.heappush(queue, (est, new_cost, neighbor, path))
+
+ 
+
+    return None  # If no path found
+
+ 
+
+# Define a sample graph (adjacency list with edge costs)
+
+graph = {
+
+    'A': [('B', 1), ('C', 3)],
+
+    'B': [('D', 3), ('E', 1)],
+
+    'C': [('F', 5)],
+
+    'D': [],
+
+    'E': [('F', 2)],
+
+    'F': []
+
+}
+
+ 
+
+# Define heuristic values (straight-line estimated cost to goal 'F')
+
+heuristics = {
+
+    'A': 6,
+
+    'B': 4,
+
+    'C': 5,
+
+    'D': 3,
+
+    'E': 2,
+
+    'F': 0
+
+}
+
+ 
+
+# Run A* from A to F
+
+print("A* Path from A to F:")
+
+print(a_star('A', 'F', graph, heuristics))
