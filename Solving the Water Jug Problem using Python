@@ -1,0 +1,75 @@
+Experiment 1: Solving the Water Jug Problem using Python
+
+Objective: To understand the basics of Artificial Intelligence by solving the classic Water Jug Problem.
+
+ 
+
+CODE:
+
+from collections import deque
+
+ 
+
+def water_jug_solver(jug1_capacity, jug2_capacity, target):
+
+    visited = set()
+
+    queue = deque()
+
+    queue.append((0, 0))
+
+ 
+
+    while queue:
+
+        state = queue.popleft()
+
+        if state in visited:
+
+            continue
+
+        visited.add(state)
+
+        (a, b) = state
+
+        print(f"Jug1: {a}, Jug2: {b}")
+
+ 
+
+        if a == target or b == target:
+
+            print("Target achieved!")
+
+            return
+
+ 
+
+        possible_states = set()
+
+        possible_states.add((jug1_capacity, b))
+
+        possible_states.add((a, jug2_capacity))
+
+        possible_states.add((0, b))
+
+        possible_states.add((a, 0))
+
+ 
+
+        pour_to_jug2 = min(a, jug2_capacity - b)
+
+        pour_to_jug1 = min(b, jug1_capacity - a)
+
+ 
+
+        possible_states.add((a - pour_to_jug2, b + pour_to_jug2))
+
+        possible_states.add((a + pour_to_jug1, b - pour_to_jug1))
+
+ 
+
+        queue.extend(possible_states)
+
+ 
+
+water_jug_solver(4, 3, 2)
