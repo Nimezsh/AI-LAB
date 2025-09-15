@@ -1,0 +1,126 @@
+To analyse data distribution - Normal Distribution, Binomial distribution, Poisson distribution
+
+Objective: To analyze and visualize Normal, Binomial, and Poisson distributions.
+
+ 
+
+ 
+
+CODE:
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+from scipy.stats import norm, binom, poisson
+
+mu, sigma = 0, 1   # Mean = 0, Standard Deviation = 1
+
+data = np.random.normal(mu, sigma, 1000)   # 1000 samples
+
+ 
+
+plt.hist(data, bins=30, density=True, alpha=0.6, color='skyblue', edgecolor='black')
+
+xmin, xmax = plt.xlim()
+
+x = np.linspace(xmin, xmax, 100)
+
+p = norm.pdf(x, mu, sigma)
+
+plt.plot(x, p, 'r', linewidth=2)
+
+plt.title("Normal Distribution (mean=0, std=1)")
+
+plt.show()
+
+n, p = 10, 0.5   # n=10 trials, p=0.5 probability of success
+
+x = np.arange(0, n+1)
+
+pmf = binom.pmf(x, n, p)
+
+ 
+
+plt.bar(x, pmf, color='orange', edgecolor='black')
+
+plt.title("Binomial Distribution (n=10, p=0.5)")
+
+plt.xlabel("Number of Successes")
+
+plt.ylabel("Probability")
+
+plt.show()
+
+lambda_val = 4   # λ = average rate of events
+
+x = np.arange(0, 15)
+
+pmf = poisson.pmf(x, mu=lambda_val)
+
+ 
+
+plt.bar(x, pmf, color='green', edgecolor='black')
+
+plt.title("Poisson Distribution (λ=4)")
+
+plt.xlabel("Number of Events")
+
+plt.ylabel("Probability")
+
+plt.show()
+
+--2 PART--
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+from scipy.stats import binom
+
+ 
+
+n, p = 10, 0.5
+
+x = np.arange(0, n+1)
+
+pmf = binom.pmf(x, n, p)
+
+ 
+
+plt.bar(x, pmf, color='orange', edgecolor='black')
+
+plt.title('Binomial Distribution (n=10, p=0.5)')
+
+plt.xlabel("Number of Successes")
+
+plt.ylabel("Probability")
+
+plt.show()
+
+--3 PART--
+
+from scipy.stats import poisson
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+ 
+
+lambda_val = 4
+
+x = np.arange(0, 15)
+
+pmf = poisson.pmf(x, mu=lambda_val)
+
+ 
+
+plt.bar(x, pmf, color='green', edgecolor='black')
+
+plt.title('Poisson Distribution (λ=4)')
+
+plt.xlabel('Number of Events')
+
+plt.ylabel('Probability')
+
+plt.show()
