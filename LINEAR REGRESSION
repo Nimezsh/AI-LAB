@@ -1,0 +1,83 @@
+To perform linear regression on a dataset using scikit-learn and manually.
+
+Objective: To implement linear regression manually and using scikit-learn.
+
+ 
+
+#MANUAL METHOD
+
+CODE:
+
+# Linear Regression by Hand (without scikit-learn)
+
+ 
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+ 
+
+# 1) Dataset (x = study hours, y = marks)
+
+x = np.array([1, 2, 3, 4, 5], dtype=float)   # independent variable
+
+y = np.array([2, 4, 5, 4, 5], dtype=float)   # dependent variable
+
+ 
+
+# 2) Compute means
+
+x_bar = np.mean(x)
+
+y_bar = np.mean(y)
+
+ 
+
+# 3) Compute slope (m) and intercept (c)
+
+numerator = np.sum((x - x_bar) * (y - y_bar))
+
+denominator = np.sum((x - x_bar) ** 2)
+
+m = numerator / denominator                 # slope
+
+c = y_bar - m * x_bar                       # intercept
+
+ 
+
+print("Slope (m):", m)
+
+print("Intercept (c):", c)
+
+print(f"Equation of line: y = {m:.2f}x + {c:.2f}")
+
+ 
+
+# 4) Predictions and residuals
+
+y_hat = m * x + c                           # predicted values
+
+residuals = y - y_hat                       # errors
+
+ 
+
+print("Predicted values:", y_hat)
+
+print("Residuals (errors):", residuals)
+
+ 
+
+# 5) Plot results
+
+plt.scatter(x, y, color="blue", label="Actual data")
+
+plt.plot(x, y_hat, color="red", label="Regression line")
+
+plt.xlabel("Study Hours")
+
+plt.ylabel("Marks")
+
+plt.legend()
+
+plt.show()
