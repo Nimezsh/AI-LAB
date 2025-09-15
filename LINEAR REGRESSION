@@ -81,3 +81,64 @@ plt.ylabel("Marks")
 plt.legend()
 
 plt.show()
+
+#USING SCIKIT-LEARN
+
+
+# Linear Regression using scikit-learn
+
+ 
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+from sklearn.linear_model import LinearRegression
+
+from sklearn.model_selection import train_test_split
+
+ 
+
+# Step 1: Create some sample dataset
+
+X = np.random.rand(100, 1) * 10       # 100 values between 0 and 10
+
+y = 2.5 * X + np.random.randn(100, 1) * 2  # y = 2.5x + noise
+
+ 
+
+# Step 2: Split dataset into training and testing
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+ 
+
+# Step 3: Create and train Linear Regression model
+
+model = LinearRegression()
+
+model.fit(X_train, y_train)
+
+# Step 4: Make predictions
+
+y_pred = model.predict(X_test)
+
+print("Slope (Coefficient):", model.coef_[0][0])
+
+print("Intercept:", model.intercept_[0])
+
+# Step 5: Display results
+
+plt.scatter(X_test, y_test, color="blue", label="Actual data")
+
+plt.plot(X_test, y_pred, color="red", label="Regression line")
+
+plt.xlabel("X values")
+
+plt.ylabel("y values")
+
+plt.legend()
+
+plt.show()
+
+
