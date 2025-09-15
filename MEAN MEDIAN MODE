@@ -1,0 +1,117 @@
+Computation of Mean, Median, Mode, and Standard Deviation using Python without Standard Libraries.
+
+ 
+
+Objective: To manually calculate mean, median, mode, and standard deviation in Python without using standard libraries.
+
+ 
+
+CODE:
+
+# User Input
+
+user_input = input("Enter numbers separated by space: ")
+
+ 
+
+# Convert input to list of integers
+
+numbers = []
+
+for x in user_input.split():
+
+    numbers.append(int(x))
+
+ 
+
+# Mean
+
+total = 0
+
+for num in numbers:
+
+    total += num
+
+mean = total / len(numbers)
+
+ 
+
+# Median
+
+sorted_nums = sorted(numbers)
+
+length = len(sorted_nums)
+
+middle = length // 2
+
+if length % 2 == 0:
+
+    median = (sorted_nums[middle - 1] + sorted_nums[middle]) / 2
+
+else:
+
+    median = sorted_nums[middle]
+
+ 
+
+# Mode
+
+freq = {}
+
+for num in numbers:
+
+    if num in freq:
+
+        freq[num] += 1
+
+    else:
+
+        freq[num] = 1
+
+ 
+
+highest = max(freq.values())
+
+mode = []
+
+for key in freq:
+
+    if freq[key] == highest:
+
+        mode.append(key)
+
+ 
+
+# Standard Deviation
+
+# Formula: sqrt( (Σ(x - mean)^2) / n )
+
+# Manual square root using Newton-Raphson
+
+variance = 0
+
+for num in numbers:
+
+    variance += (num - mean) ** 2
+
+variance /= len(numbers)
+
+ 
+
+std = variance
+
+for _ in range(10):
+
+    std = 0.5 * (std + variance / std)
+
+ 
+
+# Output
+
+print("Mean:", mean)
+
+print("Median:", median)
+
+print("Mode:", mode[0] if len(mode) == 1 else mode)
+
+print("Standard Deviation:", std)
